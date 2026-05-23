@@ -1,0 +1,30 @@
+Windows Powershell (as admin)
+
+1. wsl --install
+
+reboot
+
+2. wsl --install -d Ubuntu
+3. exit
+4. wsl -l -v
+4. winget install -e --id Docker.DockerDesktop
+5. Start-Process "C:\Program Files\Docker\Docker\Docker Desktop.exe"; Start-Sleep -Seconds 15; & "C:\Program Files\Docker\Docker\resources\bin\docker.exe" version
+
+6. cd folder to compose.yml
+7. docker compose up -d
+8. docker exec -it kafka-single-node /opt/kafka/bin/kafka-topics.sh --create --topic orders --bootstrap-server localhost:9092
+9. docker exec -it kafka-single-node /opt/kafka/bin/kafka-topics.sh --describe --topic orders --bootstrap-server localhost:9092
+10. (execute in new window) docker exec -it kafka-single-node /opt/kafka/bin/kafka-console-producer.sh --topic orders --bootstrap-server localhost:9092
+
+// delete topic
+11. docker exec -it kafka-single-node /opt/kafka/bin/kafka-topics.sh --delete --topic orders --bootstrap-server localhost:9092
+12. repeat step 8
+
+13. winget install -e --id Python.Python.3.11
+14. python --version --> does not display the version, proceed to 12a
+14a. $env:Path = "$env:LOCALAPPDATA\Programs\Python\Python311;$env:LOCALAPPDATA\Programs\Python\Python311\Scripts;$env:Path"; python --version
+15. python -m pip install -r code/requirements_kafka_python.txt
+16. python code/consumer.py
+17. (execute in new window) & "$env:LOCALAPPDATA\Programs\Python\Python311\python.exe" code/producer.py
+
+
